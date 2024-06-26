@@ -62,12 +62,17 @@ return {
 <!-- new script setup version -->
 <script setup>
 
-import {reactive, computed, watch} from 'vue';
+import {reactive, computed, watch, onBeforeMount, onMounted, onBeforeUnmount, onUnmounted, onActivated, onDeactivated, onUpdated, onBeforeUpdate} from 'vue';
 
 // const counter = ref(20);
 // const counterTitle = ref('My Counter');
 
+// app title logic
 const appTitle = 'My amazing app';
+onMounted(() => {
+  console.log('on mounted - app title');
+})
+
 //methods
 const increaseCounter = (amount, ev) => {
   console.log('event', ev)
@@ -76,7 +81,9 @@ const increaseCounter = (amount, ev) => {
 const decreaseCounter = () => {
   counterData.count--
 }
-
+onMounted(() => {
+  console.log('on mounted - count');
+})
 const counterData = reactive({
   count: 20,
   title: 'My Counter'
@@ -93,6 +100,31 @@ console.log('new count', newCount)
 if (newCount> 25) {
   alert('we have gone past 25!')
 }
+})
+//hooks
+onBeforeMount(() => {
+  console.log('on before mount')
+})
+onMounted(() => {
+  console.log('on mounted');
+})
+onBeforeUnmount(() => {
+  console.log('on before unmount')
+})
+onUnmounted(() => {
+  console.log('on unmounted')
+})
+onActivated(() => {
+  console.log('on activated')
+})
+onDeactivated(() => {
+  console.log('on deactivated')
+})
+onBeforeUpdate(() => {
+  console.log('on before update')
+})
+onUpdated(()=>{
+console.log('on updated')
 })
 </script>
 
