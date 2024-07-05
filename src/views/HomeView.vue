@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h2> {{ appTitle }}</h2>
+    <h2 ref="appTitleRef"> {{ appTitle }}</h2>
   <h3> {{ counterData.title }}:</h3>
     <div>
       <button @click="decreaseCounter" class="btn">-</button>
@@ -10,7 +10,7 @@
     </div>
     <div class="edit">
       <h4>Edit counter title</h4>
-      <input v-model="counterData.title" type="text">
+      <input v-model="counterData.title" type="text" v-autofocus>
     </div>
   </div>
 </template>
@@ -30,12 +30,19 @@ export default {
     decreaseCounter() {
       this.counter--
     }
+  },
+  directives: {
+    autofocus: {
+      mounted(el) {
+        el.focus()
+      }
+    }
   }
 }
-</script> -->
+</script>  -->
 
 <!-- Composition API script - new -- script version -->
-<!-- <script>
+ <!-- <script>
 
 import {ref} from 'vue';
 
@@ -56,14 +63,14 @@ return {
 }
   }
 }
-</script> -->
+</script>  -->
 
 
 <!-- new script setup version -->
-<script setup>
+ <script setup>
 
-import {reactive, computed, watch, onBeforeMount, onMounted, onBeforeUnmount, onUnmounted, onActivated, onDeactivated, onUpdated, onBeforeUpdate} from 'vue';
-
+import {reactive, computed, watch, onBeforeMount, onMounted, onBeforeUnmount, onUnmounted, onActivated, onDeactivated, onUpdated, onBeforeUpdate, ref, nextTick} from 'vue';
+import { vAutofocus } from '@/directives/vAutoFocus';
 // const counter = ref(20);
 // const counterTitle = ref('My Counter');
 
@@ -71,12 +78,16 @@ import {reactive, computed, watch, onBeforeMount, onMounted, onBeforeUnmount, on
 const appTitle = 'My amazing app';
 onMounted(() => {
   console.log('on mounted - app title');
+  console.log('app title ref', appTitleRef)
 })
 
 //methods
 const increaseCounter = (amount, ev) => {
   console.log('event', ev)
   counterData.count +=amount;
+  nextTick(() => {
+    console.log('do something when counter has updated')
+  }) 
 }
 const decreaseCounter = () => {
   counterData.count--
@@ -126,7 +137,18 @@ onBeforeUpdate(() => {
 onUpdated(()=>{
 console.log('on updated')
 })
-</script>
+
+/* 
+directives
+*/
+// const vAutofocus = {
+//   mounted: (el) => {
+//     el.focus();
+//   }
+// } //v-autofocus
+
+const appTitleRef = ref(null);
+</script> 
 
 <style>
 .home {

@@ -1,7 +1,8 @@
 <template>
     <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/posts">Posts</RouterLink>
+        <RouterLink to="/modals">Modals</RouterLink>
       </nav>
   <RouterView />
 </template>
@@ -41,6 +42,8 @@ nav a {
 nav a:first-of-type {
   border: 0;
 }
-
+#app {
+  position: relative;
+}
 
 </style>
