@@ -1,5 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '../views/HomeView.vue';
+import PostsView from '../views/Posts.vue';
+import PostDetailView from '../views/PostDetail.vue';
+import ModalsView from '../views/Modals.vue';
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,17 +16,17 @@ const router = createRouter({
     {
       path: '/posts',
       name: 'posts',
-      component: () => import('../views/Posts.vue')
+      component: PostsView
     },
     {
       path: '/postDetail/:id',
       name: 'postDetail',
-      component: () => import('../views/PostDetail.vue')
+      component: PostDetailView
     },
     {
       path: '/modals',
       name: 'modals',
-      component: () => import('../views/Modals.vue')
+      component: ModalsView
     },
   ]
 })
